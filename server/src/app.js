@@ -10,6 +10,7 @@ require('./database');
 app.use('/', express.static('public'));
 app.use(cors());
 app.use(parser.json());
+app.use(parser.urlencoded({ extended: false }));
 
 app.use('/api', router);
 

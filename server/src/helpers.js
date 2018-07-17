@@ -1,11 +1,28 @@
 class Helpers {
 
-    simple_response(response, success, data = null, message = "") {
+    jsonResponse(response, success, data = null, message = "") {
         return response.json({
             success: success,
             data: data,
             message: message
         });
+    }
+
+    validateRequired(value) {
+        if (value == null || value == "") {
+            return false;
+        }
+        return true;
+    }
+
+    randomString(n = 10) {
+        var text = "";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        for (let i = 0; i < n; i++)
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+        return text;
     }
 }
 

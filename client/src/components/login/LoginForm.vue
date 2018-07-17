@@ -3,11 +3,11 @@
     <div class="form-group">
       <label for="email-address">Email address</label>
       <input type="email" class="form-control" id="email-address" aria-describedby="Email"
-             placeholder="Enter email">
+             placeholder="Enter email" v-model="email">
     </div>
     <div class="form-group">
       <label for="password-field">Password</label>
-      <input type="password" class="form-control" id="password-field" placeholder="Password">
+      <input type="password" class="form-control" id="password-field" placeholder="Password" v-model="password">
     </div>
     <button type="submit" class="btn btn-primary" @click.prevent="login()">Login</button>
   </div>
@@ -15,6 +15,8 @@
 
 <script>
 import ApiClient from "../../services/ApiClient.js";
+import Notification from "../../services/Notification.js";
+import Auth from "../../services/Auth.js";
 
 export default {
   name: "LoginForm",
@@ -29,11 +31,17 @@ export default {
       ApiClient.post("/auth/check", {
         email: this.email,
         password: this.password
-      })
-        .then(response => {
-          console.log("response", response);
-        })
-        .catch();
+      }).then(response => {
+        let body = response.data;
+        if (!body.success) {
+          Notification.error(body.message);
+        } else {
+          let user = body.data.user;
+
+          Auth.save(user);
+          Auth.redirectIfAuthenticated();
+        }
+      });
     }
   }
 };

@@ -9,11 +9,11 @@ const axiosInstance = axios.create({
 
 class ApiClient {
 
-    static get(url, options) {
+    static get(url, options = null) {
         return axiosInstance.get(url, options);
     }
 
-    static post(url, data, options) {
+    static post(url, data, options = null) {
         return axiosInstance.post(url, data, options);
     }
 }
