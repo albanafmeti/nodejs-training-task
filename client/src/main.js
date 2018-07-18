@@ -20,10 +20,13 @@ Vue.use(VuejsDialog, {
   animation: 'fade'
 });
 
+import VueSocketio from 'vue-socket.io';
+Vue.use(VueSocketio, 'http://localhost:3000');
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
-  components: {App},
+  components: { App },
   template: '<App/>'
 });

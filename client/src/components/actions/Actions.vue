@@ -49,16 +49,35 @@
 </template>
 
 <script>
-  import Auth from '../../services/Auth';
+import Auth from "../../services/Auth";
+import ApiClient from "../../services/ApiClient";
 
-  export default {
-    name: "Actions",
-    created: function () {
-      Auth.checkWithRedirect();
+export default {
+  name: "Actions",
+  data: function() {
+    return {
+      actions: []
+    };
+  },
+  methods: {
+    getActions() {
+      ApiClient.get("/actions").then(response => {
+        let body = response.data;
+        if (!body.success) {
+          Notification.error(body.message);
+        } else {
+          this.actions = body.data.actions;
+          console.log(this.actions);
+        }
+      });
     }
+  },
+  created: function() {
+    Auth.checkWithRedirect();
+    this.getActions();
   }
+};
 </script>
 
 <style scoped>
-
 </style>

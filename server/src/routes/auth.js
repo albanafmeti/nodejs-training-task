@@ -7,7 +7,7 @@ var router = express.Router();
 
 router.post('/check', function (request, response) {
 
-    let data = request.body;
+    const data = request.body;
 
     // Validate Email
     if (!Helpers.validateRequired(data.email)) {

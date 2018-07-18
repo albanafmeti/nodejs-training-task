@@ -7,7 +7,7 @@ Vue.use(VueLocalStorage);
 class Auth {
 
   static save(user) {
-    Vue.localStorage.set('auth_user', user);
+    Vue.localStorage.set('auth_user', JSON.stringify(user));
     Vue.localStorage.set('auth_token', user.token);
   }
 
@@ -16,7 +16,7 @@ class Auth {
   }
 
   static user() {
-    return Vue.localStorage.get('auth_user');
+    return JSON.parse(Vue.localStorage.get('auth_user'));
   }
 
   static clear() {
