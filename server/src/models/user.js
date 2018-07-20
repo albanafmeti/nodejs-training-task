@@ -18,6 +18,14 @@ userSchema.methods.generateNewToken = function (cb) {
     return this.update({ token: token }, cb);
 };
 
+userSchema.methods.updateLastVisitAt = function (cb) {
+    return this.update({ last_visit_at: new Date() }, cb);
+};
+
+userSchema.methods.updateLastActionAt = function (cb) {
+    return this.update({ last_action_at: new Date() }, cb);
+};
+
 userSchema.statics.getAuthenticatedUser = function (token, cb) {
     return this.findOne({ token: token }, cb);
 };

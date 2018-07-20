@@ -30,6 +30,8 @@ router.post('/check', function (request, response) {
         if (user && bcrypt.compareSync(data.password, user.password)) {
             user.generateNewToken((err, result) => {
                 if (result.ok) {
+
+                    user.updateLastVisitAt();
                     return Helpers.jsonResponse(response, true, { user: user }, 'Credentials match.');
                 }
                 return Helpers.jsonResponse(response, false, user, 'Something went wrong.');

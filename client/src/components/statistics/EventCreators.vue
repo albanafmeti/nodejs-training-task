@@ -23,7 +23,7 @@
 
               <div class="form-group mb-5">
                 <label class="mr-sm-2">Select Option</label>
-                <select class="custom-select">
+                <select class="custom-select" @change.prevent="onSelectChange">
                   <option value="1">One</option>
                   <option value="2">Two</option>
                   <option value="3">Three</option>
@@ -54,16 +54,38 @@
 </template>
 
 <script>
-  import Auth from '../../services/Auth';
+import Auth from "../../services/Auth";
+import ApiClient from "../../services/ApiClient";
+import Notification from "../../services/Notification";
 
-  export default {
-    name: "EventCreators",
-    created: function () {
-      Auth.checkWithRedirect();
+export default {
+  name: "EventCreators",
+  methods: {
+    registerEvent(eventData) {
+      ApiClient.post("/statistics/create", {
+        eventData: JSON.stringify(eventData)
+      }).then(response => {
+        let body = response.data;
+        if (!body.success) {
+          Notification.error(body.message);
+        } else {
+          Notification.success(body.message);
+        }
+      });
+    },
+    onSelectChange(event) {
+      this.registerEvent({
+        type: event.type,
+        action: "selectChange"
+      });
     }
+  },
+  created: function() {
+    Auth.checkWithRedirect();
+    Auth.redirectIfAdmin();
   }
+};
 </script>
 
 <style scoped>
-
 </style>

@@ -18,8 +18,13 @@ router.get('/', function (request, response) {
             return Helpers.jsonResponse(response, false, { actions: [] }, 'You are not authorized.');
         }
 
-        // Get list of actions
-        Action.find({ $or: [{ 'user_id': user._id }, { 'dest_user_id': user._id }] }, function (err, actions) {
+
+        let condition = {};
+        if (!user.is_admin) {
+            condition = { $or: [{ 'user_id': user._id }, { 'dest_user_id': user._id }] };
+        }
+
+        Action.find(condition).populate('user_id').exec(function (err, actions) {
 
             if (err) {
                 return Helpers.jsonResponse(response, false, { actions: [] }, 'Something went wrong.');

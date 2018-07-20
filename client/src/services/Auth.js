@@ -25,13 +25,13 @@ class Auth {
   }
 
   static check() {
-    const auth_token = Vue.localStorage.get('auth_token');
+    const auth_token = this.token();
     return !!auth_token;
   }
 
   static isAdmin() {
     if (this.check()) {
-      const auth_user = Vue.localStorage.get('auth_user');
+      const auth_user = this.user();
       return !!auth_user.is_admin;
     }
 
@@ -46,6 +46,12 @@ class Auth {
 
   static redirectNonAdmin() {
     if (!this.isAdmin()) {
+      router.push('login');
+    }
+  }
+
+  static redirectIfAdmin() {
+    if (this.isAdmin()) {
       router.push('login');
     }
   }

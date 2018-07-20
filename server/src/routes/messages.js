@@ -75,6 +75,7 @@ function getRouter(socket_io) {
                 }
 
                 socket_io.broadcast.emit('new_message');
+                user.updateLastActionAt();
                 return Helpers.jsonResponse(response, true, { message: message }, 'Message sent successfully.');
             });
         });

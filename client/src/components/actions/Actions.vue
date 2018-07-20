@@ -19,23 +19,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
+                <tr v-for="action in actions" :key="action._id">
+                  <th scope="row">{{ getDate(action.created_at) }}</th>
+                  <td>{{ action.type }}</td>
+                  <td>{{ action.content }}</td>
+                  <td>{{ getAuthor(action) }}</td>
                 </tr>
                 </tbody>
               </table>
@@ -70,6 +58,22 @@ export default {
           console.log(this.actions);
         }
       });
+    },
+    getAuthor(action) {
+      const logged_user = Auth.user();
+      if (action.by_admin) {
+        return "Admin";
+      } else {
+        if (logged_user.is_admin) {
+          return action.user_id.name;
+        } else if (logged_user._id === action.user_id._id) {
+          return "Me";
+        }
+      }
+    },
+    getDate(date) {
+      const dateStr = new Date(date);
+      return dateStr.toLocaleDateString() + " " + dateStr.toLocaleTimeString();
     }
   },
   created: function() {
