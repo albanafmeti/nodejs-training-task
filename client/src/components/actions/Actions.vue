@@ -39,6 +39,7 @@
 <script>
 import Auth from "../../services/Auth";
 import ApiClient from "../../services/ApiClient";
+import Notification from "../../services/Notification";
 
 export default {
   name: "Actions",
@@ -55,7 +56,6 @@ export default {
           Notification.error(body.message);
         } else {
           this.actions = body.data.actions;
-          console.log(this.actions);
         }
       });
     },

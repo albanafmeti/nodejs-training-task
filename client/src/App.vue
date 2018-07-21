@@ -11,6 +11,8 @@
             </router-link>
             <hr/>
 
+            <Navigation/>
+
             <router-view/>
           </div>
         </div>
@@ -33,33 +35,36 @@
 </template>
 
 <script>
-  export default {
-    name: 'App'
-  }
+import Navigation from "./components/general/Navigation.vue";
+
+export default {
+  name: "App",
+  components: { Navigation }
+};
 </script>
 
 <style lang="scss">
+.main-content {
+  min-height: 500px;
+}
 
-  .main-content {
-    min-height: 500px;
-  }
+.app-title {
+  font-family: initial;
+}
 
-  .app-title {
-    font-family: initial;
-  }
+.app-title-link,
+.app-title-link:hover {
+  text-decoration: none;
+  color: #000;
+}
 
-  .app-title-link, .app-title-link:hover {
-    text-decoration: none;
-    color: #000;
-  }
+.special-border {
+  border: 1px dashed #dedede;
+  box-shadow: 0 2px 0px 0 rgba(0, 0, 0, 0.1);
+  border-bottom: 0;
+}
 
-  .special-border {
-    border: 1px dashed #dedede;
-    box-shadow: 0 2px 0px 0 rgba(0, 0, 0, 0.1);
-    border-bottom: 0;
-  }
-
-  .border-dashed {
-    border: 1px dashed #dedede;
-  }
+.border-dashed {
+  border: 1px dashed #dedede;
+}
 </style>

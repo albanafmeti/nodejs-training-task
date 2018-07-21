@@ -39,6 +39,9 @@ export default {
           let user = body.data.user;
 
           Auth.save(user);
+
+          this.$events.emit("USER_LOGGED_IN");
+
           Auth.redirectIfAuthenticated();
         }
       });

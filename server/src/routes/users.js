@@ -13,7 +13,7 @@ router.get('/clients', function (request, response) {
             return Helpers.jsonResponse(response, false, { clients: [] }, 'Something went wrong.');
         }
 
-        if (!user) {
+        if (!user || !user.is_admin) {
             return Helpers.jsonResponse(response, false, { clients: [] }, 'You are not authorized.');
         }
 

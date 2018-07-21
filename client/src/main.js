@@ -6,19 +6,8 @@ import router from './router'
 
 Vue.config.productionTip = false;
 
-// Import moment.js
-window.moment = require('moment');
-
-// Import Vuejs Dialog.
-import VuejsDialog from "vuejs-dialog";
-
-Vue.use(VuejsDialog, {
-  html: true,
-  loader: true,
-  okText: 'Delete',
-  cancelText: 'Cancel',
-  animation: 'fade'
-});
+import VueEvents from 'vue-events';
+Vue.use(VueEvents)
 
 import VueSocketio from 'vue-socket.io';
 Vue.use(VueSocketio, 'http://localhost:3000');

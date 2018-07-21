@@ -23,7 +23,9 @@ User.create({
     password: bcrypt.hashSync('123456', 10),
     is_admin: false,
     token: '44kaj8sj66ttY6s7JQQp92jwn46nc1cc0ikqj2jjde7k211',
-    created_at: new Date()
+    created_at: new Date(),
+    last_visit_at: null,
+    last_action_at: null
 }, function (err) {
     if (!err) {
         console.log('User endrimija@gmail.com created.');

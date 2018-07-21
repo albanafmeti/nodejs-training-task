@@ -31,7 +31,7 @@ router.post('/check', function (request, response) {
             user.generateNewToken((err, result) => {
                 if (result.ok) {
 
-                    user.updateLastVisitAt();
+                    user.updateLastVisitAt((err, result) => { });
                     return Helpers.jsonResponse(response, true, { user: user }, 'Credentials match.');
                 }
                 return Helpers.jsonResponse(response, false, user, 'Something went wrong.');

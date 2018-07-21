@@ -19,23 +19,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
+                <tr v-for="client in clients" :key="client._id">
+                  <th scope="row">{{ client.name }}</th>
+                  <td>{{ getDate(client.created_at) }}</td>
+                  <td>{{ getDate(client.last_visit_at) }}</td>
+                  <td>{{ getDate(client.last_action_at) }}</td>
                 </tr>
                 </tbody>
               </table>
@@ -49,16 +37,39 @@
 </template>
 
 <script>
-  import Auth from '../../services/Auth';
+import Auth from "../../services/Auth";
+import ApiClient from "../../services/ApiClient";
+import Notification from "../../services/Notification";
 
-  export default {
-    name: "Users",
-    created: function () {
-      Auth.redirectNonAdmin();
+export default {
+  name: "Users",
+  data: function() {
+    return {
+      clients: []
+    };
+  },
+  methods: {
+    getClients() {
+      ApiClient.get("/users/clients").then(response => {
+        let body = response.data;
+        if (!body.success) {
+          Notification.error(body.message);
+        } else {
+          this.clients = body.data.clients;
+        }
+      });
+    },
+    getDate(date) {
+      const dateStr = new Date(date);
+      return dateStr.toLocaleDateString() + " " + dateStr.toLocaleTimeString();
     }
+  },
+  created: function() {
+    Auth.redirectNonAdmin();
+    this.getClients();
   }
+};
 </script>
 
 <style scoped>
-
 </style>
