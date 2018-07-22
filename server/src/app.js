@@ -1,7 +1,6 @@
 let express = require('express');
 let cors = require('cors');
 
-
 let app = express();
 let parser = require('body-parser');
 
