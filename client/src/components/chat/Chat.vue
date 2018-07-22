@@ -58,8 +58,8 @@ export default {
     };
   },
   watch: {
-    client_id: function(clientId) {
-      this.destinationUserId = clientId;
+    destinationUserId: function() {
+      this.getMessages();
     }
   },
   methods: {

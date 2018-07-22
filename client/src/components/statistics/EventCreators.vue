@@ -12,11 +12,11 @@
 
               <div class="form-group mb-5">
                 <div class="custom-control custom-radio custom-control-inline">
-                  <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+                  <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" @change="onRadioChange">
                   <label class="custom-control-label" for="customRadioInline1">Toggle this custom radio</label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
-                  <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+                  <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input" @change="onRadioChange">
                   <label class="custom-control-label" for="customRadioInline2">Or toggle this other custom radio</label>
                 </div>
               </div>
@@ -32,17 +32,17 @@
 
               <div class="form-group mb-5">
                 <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="customCheck1">
+                  <input type="checkbox" class="custom-control-input" id="customCheck1" @change="onCheckboxChange">
                   <label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
                 </div>
               </div>
 
               <div class="form-group mb-5">
-                <input type="number" class="form-control" placeholder="Insert Number"/>
+                <input type="number" class="form-control" placeholder="Insert Number" @change="onInputChange"/>
               </div>
 
               <div class="form-group mb-5">
-                <input type="button" class="btn btn-outline-primary" value="Click Here"/>
+                <input type="button" class="btn btn-outline-primary" value="Click Here" @click.prevent="onBtnClick"/>
               </div>
             </div>
 
@@ -77,6 +77,30 @@ export default {
       this.registerEvent({
         type: event.type,
         action: "selectChange"
+      });
+    },
+    onBtnClick(event) {
+      this.registerEvent({
+        type: event.type,
+        action: "btnClick"
+      });
+    },
+    onInputChange(event) {
+      this.registerEvent({
+        type: event.type,
+        action: "inputChange"
+      });
+    },
+    onCheckboxChange(event) {
+      this.registerEvent({
+        type: event.type,
+        action: "checkboxChange"
+      });
+    },
+    onRadioChange(event) {
+      this.registerEvent({
+        type: event.type,
+        action: "radioChange"
       });
     }
   },
