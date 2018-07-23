@@ -2,26 +2,35 @@ let express = require('express');
 let cors = require('cors');
 
 let app = express();
-let parser = require('body-parser');
+let bodyParser = require('body-parser');
+let config = require('config');
 
+// Start database connection.
 require('./database');
 
+// Serve static files.
 app.use('/', express.static('public'));
+
+// Enable CORS.
 app.use(cors());
-app.use(parser.json());
-app.use(parser.urlencoded({ extended: false }));
+
+// Parse application/json and look for raw text.
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.text());
+app.use(bodyParser.json({ type: 'application/json' }));
 
 let http = require('http').Server(app);
 let io = require('socket.io')(http);
-let handleSocketEvents = require('./socket');
 
+// Socket.io connection.
 io.on('connection', function (socket) {
     console.log('New socket connection.');
 
     let router = require('./routes')(socket);
     app.use('/api', router);
 
-    handleSocketEvents(socket);
+    require('./socket')(socket);
 });
 
 http.listen(3000, function () {

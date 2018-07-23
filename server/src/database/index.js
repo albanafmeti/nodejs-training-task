@@ -1,6 +1,7 @@
 let mongoose = require('mongoose');
+let config = require('config');
 
-mongoose.connect('mongodb://localhost/node-task', function (err) {
+mongoose.connect(config.db.host, function (err) {
     if (err) {
         console.log('Connection with the database failed.');
     } else {
