@@ -17,6 +17,10 @@ class Helpers {
     }
 
     randomString(n = 10) {
+        if (n < 1) {
+            return false;
+        }
+
         var text = "";
         var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 

@@ -4,7 +4,7 @@
   "description": "A node.js training task with Express, Mongo and Vue.",
   "main": "src/app.js",
   "scripts": {
-    "test": "mocha --timeout 10000",
+    "test": "export NODE_ENV=test && mocha $(find test -name '*.js') --timeout 10000",
     "start": "export NODE_ENV=dev && nodemon",
     "seed": "export NODE_ENV=dev && node src/database/seed.js"
   },
@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
     "mocha": "^5.2.0"
   }
 }

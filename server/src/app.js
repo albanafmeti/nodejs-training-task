@@ -7,6 +7,9 @@ let bodyParser = require('body-parser');
 // Start database connection.
 require('./database');
 
+// Seeding...
+require('./database/seed');
+
 // Serve static files.
 app.use('/', express.static('public'));
 
@@ -35,3 +38,5 @@ io.on('connection', function (socket) {
 http.listen(3000, function () {
     console.log("The server is running on port 3000.");
 });
+
+module.exports = app;

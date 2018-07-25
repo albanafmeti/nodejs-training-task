@@ -1,4 +1,5 @@
 let User = require('../models/user');
+let Helpers = require('../helpers');
 
 class Controller {
 

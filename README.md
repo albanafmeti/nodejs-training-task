@@ -15,8 +15,14 @@ Client side:
 
 ### How to run:
 
-1. Go to server directory and seed: `npm run seed`
-
-2. Then start server: `npm start`
+1. Go to server directory and run: `npm start`
 
 3. Go to client directory and run: `npm start`
+
+### How to test:
+
+We need to have the server running, since we will run tests with HTTP calls.
+
+1. Go to server directory and run: `npm start`
+
+2. Open a new CLI and run: `npm test`
