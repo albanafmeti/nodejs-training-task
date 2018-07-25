@@ -1,13 +1,13 @@
 let express = require('express');
 var router = express.Router();
 
-function getRouter(socket_io) {
+function getRouter(socket) {
     const authRoutes = require('./auth');
     const actionsRoutes = require('./actions');
-    const messagesRoutes = require('./messages')(socket_io);
+    const messagesRoutes = require('./messages')(socket);
     const usersRoutes = require('./users');
-    const statisticsRoutes = require('./statistics')(socket_io);
-    const commandsRoutes = require('./commands')(socket_io);
+    const statisticsRoutes = require('./statistics')(socket);
+    const commandsRoutes = require('./commands')(socket);
 
     router.use('/auth', authRoutes);
     router.use('/actions', actionsRoutes);

@@ -1,4 +1,4 @@
-const handleSocketEvents = (socket) => {
+function handleSocketEvents(socket) {
     socket.on('disconnect', function () {
         console.log('User disconnected.');
     });

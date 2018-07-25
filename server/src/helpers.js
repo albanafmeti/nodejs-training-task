@@ -8,11 +8,12 @@ class Helpers {
         });
     }
 
-    validateRequired(value) {
-        if (value == null || value == "") {
-            return false;
+    validate(type, value) {
+        switch (type) {
+            case 'required':
+                return !(value == null || value == "");
+                break;
         }
-        return true;
     }
 
     randomString(n = 10) {

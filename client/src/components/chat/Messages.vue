@@ -20,7 +20,7 @@ export default {
       const loggedUser = Auth.user();
       let author = "";
 
-      if (loggedUser._id === message.user_id) {
+      if (loggedUser._id === message.user) {
         author = "Me";
       } else {
         author = message.by_admin ? "Admin" : loggedUser.name;

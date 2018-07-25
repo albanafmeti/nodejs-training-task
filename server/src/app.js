@@ -3,7 +3,6 @@ let cors = require('cors');
 
 let app = express();
 let bodyParser = require('body-parser');
-let config = require('config');
 
 // Start database connection.
 require('./database');
@@ -14,7 +13,7 @@ app.use('/', express.static('public'));
 // Enable CORS.
 app.use(cors());
 
-// Parse application/json and look for raw text.
+// Parse request body.
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());

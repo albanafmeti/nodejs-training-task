@@ -65,8 +65,8 @@ export default {
         return "Admin";
       } else {
         if (logged_user.is_admin) {
-          return action.user_id.name;
-        } else if (logged_user._id === action.user_id._id) {
+          return action.user.name;
+        } else if (logged_user._id === action.user._id) {
           return "Me";
         }
       }
@@ -79,6 +79,17 @@ export default {
   created: function() {
     Auth.checkWithRedirect();
     this.getActions();
+  },
+  mounted: function() {
+    this.$options.sockets.new_message = data => {
+      this.getActions();
+    };
+    this.$options.sockets.new_statistic = data => {
+      this.getActions();
+    };
+    this.$options.sockets.new_command = data => {
+      this.getActions();
+    };
   }
 };
 </script>
