@@ -8,7 +8,7 @@ Server side:
 3. Mongoose for MongoDB
 4. Socket.io
 
-Front-end side:
+Client side:
 
 1. Vue.js
 2. Socket.io
