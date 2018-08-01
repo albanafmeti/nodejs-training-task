@@ -15,9 +15,9 @@ Client side:
 
 ### How to run:
 
-1. Go to server directory and run: `npm start`
+1. Go to server directory and run: `npm install` and then `npm start`
 
-3. Go to client directory and run: `npm start`
+3. Go to client directory and run: `npm install` and then `npm start`
 
 ### How to test:
 
